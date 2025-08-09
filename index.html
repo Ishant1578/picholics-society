@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Have Been Selected</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('https://i.postimg.cc/BnQ0kNMX/Untitled-design.png') no-repeat center center/cover;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 3rem;
+        overflow: hidden;
+        color: white;
+    }
+    .message {
+        z-index: 10;
+        position: relative;
+        font-weight: bold;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        background-color: rgba(0,0,0,0.3);
+        padding: 20px 40px;
+        border-radius: 12px;
+    }
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+    .horn {
+        position: fixed;
+        bottom: 20px;
+        width: 120px;
+        z-index: 5;
+    }
+    .horn.left {
+        left: 20px;
+        transform: rotate(20deg);
+    }
+    .horn.right {
+        right: 20px;
+        transform: rotate(-20deg) scaleX(-1);
+    }
+</style>
+</head>
+<body>
+
+<div class="message">🎉 You Have Been Selected 🎉</div>
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Party Horn Images -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Party_horn_icon.svg/512px-Party_horn_icon.svg.png" class="horn left">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Party_horn_icon.svg/512px-Party_horn_icon.svg.png" class="horn right">
+
+<!-- Party Horn Sound -->
+<audio id="partySound" src="https://www.soundjay.com/human/sounds/party-horn-01.mp3" preload="auto"></audio>
+
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+    const canvas = document.getElementById('confettiCanvas');
+    const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
+
+    // Play sound
+    document.getElementById("partySound").play();
+
+    // Single explosion from the center
+    myConfetti({
+        particleCount: 300,
+        spread: 360, 
+        origin: { x: 0.5, y: 0.5 },
+        startVelocity: 60,
+        ticks: 200
+    });
+</script>
+
+</body>
+</html>
